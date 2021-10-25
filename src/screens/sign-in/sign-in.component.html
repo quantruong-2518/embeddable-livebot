@@ -1,5 +1,32 @@
-<p>sign-in works!</p>
+<form
+  #userForm="ngForm"
+  (ngSubmit)="submitUser(userForm)"
+  class="sign-up"
+  action=""
+>
+  <div class="header">Thông tin khách hàng</div>
 
+  <input
+    [(ngModel)]="user.name"
+    name="name"
+    type="text"
+    placeholder="Nhập tên khách hàng..."
+  />
+  <input
+    [(ngModel)]="user.email"
+    name="email"
+    type="text"
+    placeholder="Nhập Email khách hàng "
+  />
+  <input
+    [(ngModel)]="user.phone"
+    name="phone"
+    type="text"
+    placeholder="Nhập số điện thoại khách hàng "
+  />
+
+  <button class="btn btn-primary btn-submit" type="submit">Bắt đầu chat</button>
+</form>
 
 <span *ngIf="showBubble" (click)="goToLiveChat()" class="btn-bubble">
   <i class="fab fa-facebook-messenger"></i>

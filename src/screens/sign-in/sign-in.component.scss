@@ -2,6 +2,34 @@
 @import "../../assets/scss/button.scss";
 @import "../../assets/scss/variables.scss";
 
+.sign-up {
+  .header {
+    margin: 1rem 0;
+  }
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  input {
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    outline: none;
+    margin: 0.75rem;
+    width: 70%;
+    border: 1px solid $border;
+  }
+
+  .btn-submit {
+    margin-top: 1em;
+    padding: 0.5rem 1rem;
+    width: 80%;
+    border-radius: 10px;
+    outline: none;
+    border: none;
+  }
+}
+
 .btn-bubble {
   font-size: 3rem;
   position: fixed;
