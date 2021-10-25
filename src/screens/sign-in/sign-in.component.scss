@@ -1,0 +1,21 @@
+@import "../../assets/scss/mixins.scss";
+@import "../../assets/scss/button.scss";
+@import "../../assets/scss/variables.scss";
+
+.btn-bubble {
+  font-size: 3rem;
+  position: fixed;
+  bottom: 2rem;
+  right: 1rem;
+  color: #4c6ef5;
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  @include centerFlex();
+
+  &:hover {
+    background-color: ghostwhite;
+    cursor: pointer;
+    box-shadow: 1px 1px 8px #888;
+  }
+}

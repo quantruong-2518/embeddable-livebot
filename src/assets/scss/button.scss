@@ -1,0 +1,19 @@
+@import "colors.scss";
+
+.btn {
+  &-primary {
+    background-color: $bg-primary;
+    color: $txt-primary;
+
+    &:hover {
+    }
+  }
+
+  &-secondary {
+    background-color: $bg-secondary;
+    color: $txt-secondary;
+
+    &:hover {
+    }
+  }
+}

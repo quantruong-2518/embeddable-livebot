@@ -1,0 +1,38 @@
+//// SCREENS SIZE
+$viewport-xs: 639px;
+$viewport-sm: 640px;
+$viewport-md: 768px;
+$viewport-lg: 1024px;
+$viewport-xl: 1280px;
+
+@mixin breakpoint($class) {
+  @if $class==xs {
+    @media (max-width: $viewport-xs) {
+      @content;
+    }
+  } @else if $class==sm {
+    @media (min-width: $viewport-sm) {
+      @content;
+    }
+  } @else if $class==md {
+    @media (min-width: $viewport-md) {
+      @content;
+    }
+  } @else if $class==lg {
+    @media (min-width: $viewport-lg) {
+      @content;
+    }
+  } @else if $class==xl {
+    @media (min-width: $viewport-xl) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint mixin supports: xs, sm, md, lg, xl, xxl";
+  }
+}
+
+@mixin centerFlex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
