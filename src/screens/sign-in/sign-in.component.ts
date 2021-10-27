@@ -20,13 +20,13 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {}
 
   goToLiveChat() {
-    const isAuthenticated = true;
-    this._router.navigate([`${isAuthenticated ? 'live-bot' : ''}`]);
-
     this.showBubble = false;
   }
 
   submitUser(form) {
-    console.log('user', form.value);
+    const isAuthenticated = true;
+    this._router.navigate([`${isAuthenticated ? 'live-bot' : ''}`]);
+
+    // console.log('user', form.value);
   }
 }

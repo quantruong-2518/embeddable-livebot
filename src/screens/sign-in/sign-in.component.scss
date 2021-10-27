@@ -2,31 +2,45 @@
 @import "../../assets/scss/button.scss";
 @import "../../assets/scss/variables.scss";
 
-.sign-up {
+.sign-up__container {
   .header {
-    margin: 1rem 0;
+    padding: 1rem 0;
+    background-color: #0e71ea;
+    width: 100%;
+    text-align: center;
+    color: white;
+    box-shadow: 1px 1px 8px #888;
+    height: 140px;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  .sign-up {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 3rem;
 
-  input {
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    outline: none;
-    margin: 0.75rem;
-    width: 70%;
-    border: 1px solid $border;
-  }
+    input {
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      outline: none;
+      margin: 0.75rem;
+      width: 70%;
+      border: 1px solid $border;
+    }
 
-  .btn-submit {
-    margin-top: 1em;
-    padding: 0.5rem 1rem;
-    width: 80%;
-    border-radius: 10px;
-    outline: none;
-    border: none;
+    .btn-submit {
+      margin-top: 1rem;
+      padding: 0.75rem 1rem;
+      width: 80%;
+      outline: none;
+      border: none;
+      cursor: pointer;
+    }
   }
 }
 
