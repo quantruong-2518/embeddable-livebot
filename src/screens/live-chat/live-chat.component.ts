@@ -26,7 +26,6 @@ export class LiveChatComponent implements OnInit {
       content: this.message,
     };
     this.messages.push(initMessage);
-
     this.message = '';
 
     const convo = document.getElementsByClassName(
