@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ChatService } from '../../services/chat.service';
+
 import { messages } from './mockdata';
 
 @Component({
@@ -11,9 +13,11 @@ export class LiveChatComponent implements OnInit {
   messages = messages;
   message = '';
 
-  constructor() {}
+  constructor(private readonly _service: ChatService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this._service.getMessage().subscribe((msg) => console.log('msg', msg));
+  }
 
   trackByIndex(index: number): number {
     return index;
@@ -27,6 +31,8 @@ export class LiveChatComponent implements OnInit {
     };
     this.messages.push(initMessage);
     this.message = '';
+
+    this._service.sendMessage('Hello !');
 
     const convo = document.getElementsByClassName(
       'conversation'

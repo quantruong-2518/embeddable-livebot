@@ -5,10 +5,10 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app.routing-module';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { environment } from 'src/environments/environment';
+import { environment } from '../environments/environment';
 
 const config: SocketIoConfig = {
-  url: 'http://139.180.132.97:3000/',
+  url: environment.socketURL,
   options: {},
 };
 

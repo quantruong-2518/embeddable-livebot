@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 
 import { LiveChatComponent } from './live-chat.component';
 import { LiveChatRoutingModule } from './live-chat-routing.module';
-import { ChatService } from 'src/services/chat.service';
+import { ChatService } from '../../services/chat.service';
 
 @NgModule({
   declarations: [LiveChatComponent],

@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  socketURL: 'http://139.180.132.97:3000/',
+  socketURL: 'http://139.180.218.42:3005/',
 };
 
 /*
