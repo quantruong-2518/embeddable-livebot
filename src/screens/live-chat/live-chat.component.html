@@ -29,11 +29,22 @@
       [style.marginLeft]="msg.from === 1 && 'auto'"
     >
       <ng-container [ngSwitch]="msg.type">
-        <div class="msg-suggestion" *ngSwitchCase="'suggestion'">
-          {{ msg.content }}
+        <div
+          class="msg-suggestion"
+          *ngSwitchCase="'suggestion'"
+          (click)="getSugAnswer(msg)"
+        >
+          {{ msg.title }}
         </div>
         <div class="msg-options" *ngSwitchCase="'options'">day la options</div>
         <div class="msg-image" *ngSwitchCase="'image'">day la image</div>
+        <div
+          class="msg-txt"
+          [class.my-message]="msg.from === 1"
+          *ngSwitchCase="text || null"
+        >
+          {{ msg.content }}
+        </div>
         <div
           class="msg-txt"
           [class.my-message]="msg.from === 1"

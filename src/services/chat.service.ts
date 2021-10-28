@@ -6,11 +6,11 @@ import { Socket } from 'ngx-socket-io';
 export class ChatService {
   constructor(private socket: Socket) {}
 
-  sendMessage(msg: string) {
-    this.socket.emit('message', msg);
+  sendMessage(msg: { content: string }) {
+    this.socket.emit('new-question', msg);
   }
 
   getMessage() {
-    return this.socket.fromEvent('message');
+    return this.socket.fromEvent('answer-question');
   }
 }

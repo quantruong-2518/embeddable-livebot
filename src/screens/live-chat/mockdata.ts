@@ -2,87 +2,11 @@ export const messages: Array<any> = [
   {
     type: 'text',
     from: 1,
-    content: 'Hello Hello',
+    content: 'Chào mừng bạn đến với chatbot của Cảnh sát biển Việt Nam',
   },
   {
-    type: 'suggestion',
-    content: 'Chon toi di',
-  },
-  {
-    type: 'suggestion',
-    content: 'Chon toi di 2',
-  },
-  {
-    type: 'suggestion',
-    content: 'Chon toi di 3',
-  },
-  {
-    type: 'options',
-    content: 'Chon di ban oi',
-    options: ['Xem lich chieu', 'Uu dai moi nhat'],
-  },
-  {
-    type: 'image',
-    content: '',
-  },
-  {
+    content: 'Chúng tôi luôn sẵn sàng giải đáp mọi thắc mắc của bạn',
     type: 'text',
     from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: '111111111111111111111111111111111111111111111111111111111111111111111111',
-  },
-  {
-    type: 'text',
-    from: 1,
-    content: 'Hello Hello',
   },
 ];

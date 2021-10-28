@@ -78,7 +78,7 @@
     overflow: auto;
 
     .msg {
-      margin: 0.5rem 0;
+      margin: 1rem 0;
       width: max-content;
 
       > div {
@@ -94,6 +94,18 @@
         &.my-message {
           background-color: $bg-secondary !important;
           color: $txt-secondary !important;
+        }
+      }
+
+      &-suggestion {
+        background-color: gainsboro !important;
+        box-shadow: 1px 1px 5px #888;
+        color: black !important;
+        cursor: pointer;
+        transition: all 0.25s ease-in-out;
+
+        &:hover {
+          transform: scale(1.1);
         }
       }
     }

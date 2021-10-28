@@ -10,19 +10,7 @@ import { ChatService } from 'src/services/chat.service';
 export class AppComponent {
   messages = [];
 
-  constructor(private _socket: ChatService) {}
+  constructor() {}
 
-  ngOnInit() {
-    this._socket.getMessage().subscribe((msg) => {
-      this.messages.push(msg);
-    });
-  }
-
-  trackByIndex(index: number, id: string) {
-    return index;
-  }
-
-  sendMessage(msg: string) {
-    this._socket.sendMessage(msg);
-  }
+  ngOnInit() {}
 }
