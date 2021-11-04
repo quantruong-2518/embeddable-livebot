@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  socketURL: 'http://139.180.218.42:3005/',
+  socketURL: 'https://trueoutsourcing.com/api/v1',
 };
 
 /*

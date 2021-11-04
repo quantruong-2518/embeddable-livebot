@@ -61,21 +61,23 @@ export class LiveChatComponent implements OnInit {
   }
 
   sendMessage() {
-    this._service.sendMessage({
-      content: this.message,
-    });
+    if (this.message) {
+      this._service.sendMessage({
+        content: this.message,
+      });
 
-    const initMessage = {
-      type: 'text',
-      from: 1,
-      content: this.message,
-    };
-    this.messages.push(initMessage);
-    this.message = '';
+      const initMessage = {
+        type: 'text',
+        from: 1,
+        content: this.message,
+      };
+      this.messages.push(initMessage);
+      this.message = '';
 
-    this.removeOldSuggestions();
+      this.removeOldSuggestions();
 
-    this.scrollToBottom();
+      this.scrollToBottom();
+    }
   }
 
   scrollToBottom() {
