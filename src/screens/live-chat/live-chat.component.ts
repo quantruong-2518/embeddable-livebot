@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 
 import { ChatService } from '../../services/chat.service';
-
-import { messages } from './mockdata';
 
 interface SuggestionAnswer {
   _id: string;
@@ -26,12 +25,33 @@ interface Suggestion {
   styleUrls: ['./live-chat.component.scss'],
 })
 export class LiveChatComponent implements OnInit {
-  messages = messages;
-  message = '';
+  messages = [];
+
+  key = '';
 
   private readonly _subscription = new Subscription();
 
-  constructor(private readonly _service: ChatService) {}
+  constructor(
+    private readonly _service: ChatService,
+    private readonly _router: Router
+  ) {
+    const currentGuest = JSON.parse(localStorage.getItem('_guest'));
+
+    if (currentGuest) {
+      this.messages = [
+        {
+          type: 'text',
+          from: 1,
+          content: `Chào mừng ${currentGuest.fullname} đến với chatbot của Cảnh sát biển Việt Nam`,
+        },
+        {
+          content: 'Chúng tôi luôn sẵn sàng giải đáp mọi thắc mắc của bạn',
+          type: 'text',
+          from: 1,
+        },
+      ];
+    } else this._router.navigate(['']);
+  }
 
   ngOnInit(): void {
     this._subscription.add(
@@ -61,18 +81,18 @@ export class LiveChatComponent implements OnInit {
   }
 
   sendMessage() {
-    if (this.message) {
+    if (this.key) {
       this._service.sendMessage({
-        content: this.message,
+        content: this.key,
       });
 
       const initMessage = {
         type: 'text',
         from: 1,
-        content: this.message,
+        content: this.key,
       };
       this.messages.push(initMessage);
-      this.message = '';
+      this.key = '';
 
       this.removeOldSuggestions();
 
