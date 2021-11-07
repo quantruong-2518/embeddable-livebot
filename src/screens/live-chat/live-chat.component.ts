@@ -1,23 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { Suggestion } from 'src/utils/model/suggestion.model';
 
 import { ChatService } from '../../services/chat.service';
-
-interface SuggestionAnswer {
-  _id: string;
-  content: string;
-  type: string;
-}
-interface Suggestion {
-  answers: Array<SuggestionAnswer>;
-  createdAt: string;
-  status: number;
-  title: string;
-  updatedAt: string;
-  _id: string;
-  type: string;
-}
 
 @Component({
   selector: 'app-live-chat',
@@ -25,9 +11,21 @@ interface Suggestion {
   styleUrls: ['./live-chat.component.scss'],
 })
 export class LiveChatComponent implements OnInit {
-  messages = [];
+  messages: Array<any> = [
+    {
+      type: 'text',
+      from: 1,
+      content: `Chào mừng  đến với chatbot của Cảnh sát biển Việt Nam`,
+    },
+    {
+      content: 'Chúng tôi luôn sẵn sàng giải đáp mọi thắc mắc của bạn',
+      type: 'text',
+      from: 1,
+    },
+  ];
 
   key = '';
+  conversationId = '';
 
   private readonly _subscription = new Subscription();
 
@@ -35,22 +33,7 @@ export class LiveChatComponent implements OnInit {
     private readonly _service: ChatService,
     private readonly _router: Router
   ) {
-    const currentGuest = JSON.parse(localStorage.getItem('_guest'));
-
-    if (currentGuest) {
-      this.messages = [
-        {
-          type: 'text',
-          from: 1,
-          content: `Chào mừng ${currentGuest.fullname} đến với chatbot của Cảnh sát biển Việt Nam`,
-        },
-        {
-          content: 'Chúng tôi luôn sẵn sàng giải đáp mọi thắc mắc của bạn',
-          type: 'text',
-          from: 1,
-        },
-      ];
-    } else this._router.navigate(['']);
+    this.conversationId = localStorage.getItem('conversationId');
   }
 
   ngOnInit(): void {
@@ -109,18 +92,26 @@ export class LiveChatComponent implements OnInit {
     }, 0);
   }
 
-  getSugAnswer(sug: Suggestion) {
+  getSugAnswer(suggestion: Suggestion) {
+    const { title, answers } = suggestion;
+
+    this._service.selectQuestion({
+      title,
+      answerContent: answers[0].content,
+      conversationId: this.conversationId,
+    });
+
     const pickedSuggestion = {
       from: 1,
       type: 'text',
-      content: sug.title,
+      content: title,
     };
 
-    const answers = sug.answers.map((asw) => {
+    const findingAnswers = answers.map((asw) => {
       return { ...asw, type: 'text' };
     });
 
-    this.messages = [...this.messages, pickedSuggestion, ...answers];
+    this.messages = [...this.messages, pickedSuggestion, ...findingAnswers];
 
     this.removeOldSuggestions();
   }

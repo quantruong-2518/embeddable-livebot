@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { io, Socket } from 'socket.io-client';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+
 import { ConvoService } from 'src/services/convo.service';
 
-interface IUser {
-  fullname: string;
-  email: string;
-  phone: string;
-}
+import { IUser } from 'src/utils/model/user.model';
+
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
@@ -16,6 +15,8 @@ interface IUser {
 export class SignInComponent implements OnInit {
   showBubble = true;
   user: IUser = { fullname: '', email: '', phone: '' };
+
+  private socket: Socket;
 
   private _subscription = new Subscription();
 
@@ -41,9 +42,13 @@ export class SignInComponent implements OnInit {
 
     this._subscription.add(
       this._convoService.createConvo(signingGuest).subscribe(
-        (res: any) => {
-          localStorage.setItem('_guest', JSON.stringify(res.data.guest));
-          this._router.navigate([`live-bot`]);
+        ({ data }) => {
+          localStorage.setItem('conversationToken', data.conversationToken);
+          localStorage.setItem('conversationId', data.conversationId);
+
+          setTimeout(() => {
+            this._router.navigate([`live-bot`]);
+          }, 0);
         },
         (err) => {
           // throw error in there
