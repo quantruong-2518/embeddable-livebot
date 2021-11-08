@@ -7,18 +7,15 @@
         <b>Cảnh sát biển Việt Nam </b>
       </div>
       <div class="left-buttons">
-        <span class="btn btn-secondary dropdown">
-          <i class="fa fa-ellipsis-h" aria-hidden="true"></i>
-        </span>
-        <span class="btn btn-secondary minimize">
-          <i class="fa fa-minus" aria-hidden="true"></i>
+        <span (click)="closeConversation()" class="btn btn-secondary dropdown">
+          <i class="fa fa-times" aria-hidden="true"></i>
         </span>
       </div>
     </div>
-    <div class="header-search">
+    <!-- <div class="header-search">
       <input type="text" placeholder="Tìm trong cuộc hội thoại..." />
       <span><i class="fas fa-search"></i></span>
-    </div>
+    </div> -->
   </div>
 
   <!-- CONVERSATION  -->
@@ -54,6 +51,10 @@
         </div>
       </ng-container>
     </div>
+
+    <button *ngIf="showAllButtonDisplay" (click)="showAll()" class="show-all">
+      Hiển thị hết {{ suggestionsLength }} kết quả
+    </button>
   </div>
 
   <!-- CHAT-BAR  -->

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
+import { ConvoService } from 'src/services/convo.service';
 import { Suggestion } from 'src/utils/model/suggestion.model';
 
 import { ChatService } from '../../services/chat.service';
@@ -26,28 +27,38 @@ export class LiveChatComponent implements OnInit {
 
   key = '';
   conversationId = '';
+  showAllButtonDisplay = false;
+  showAllSugs = false;
+  suggestionsLength = 0;
+  fullMessages = [];
 
   private readonly _subscription = new Subscription();
 
   constructor(
     private readonly _service: ChatService,
-    private readonly _router: Router
+    private readonly _router: Router,
+    private readonly _convoService: ConvoService
   ) {
     this.conversationId = localStorage.getItem('conversationId');
   }
 
   ngOnInit(): void {
+    this.listenSuggestions();
+  }
+
+  ngOnDestroy() {
+    this._subscription.unsubscribe();
+  }
+
+  listenSuggestions() {
     this._subscription.add(
       this._service.getMessage().subscribe((suggestions: Suggestion[]) => {
-        if (suggestions.length) {
-          this.messages = [...this.messages, ...suggestions];
-        } else {
-          const notFoundMsg = {
-            content: 'Không có dữ liệu câu hỏi phù hợp',
-            type: 'text',
-          };
+        this.suggestionsLength = suggestions.length;
 
-          this.messages = [...this.messages, notFoundMsg];
+        if (suggestions.length) {
+          this.postMessageToScreen(suggestions);
+        } else {
+          this.showNotFoundMessage();
         }
 
         this.scrollToBottom();
@@ -55,8 +66,69 @@ export class LiveChatComponent implements OnInit {
     );
   }
 
-  ngOnDestroy() {
-    this._subscription.unsubscribe();
+  postMessageToScreen(suggestions: Suggestion[]) {
+    // select question immediately if only have 1 question
+    const isOnlyOneQuestion = suggestions.length === 1;
+    if (isOnlyOneQuestion) {
+      this.getSugAnswer(suggestions[0]);
+    } else {
+      this.fullMessages = [...this.messages, ...suggestions];
+
+      // show all if less or equal than 3
+      if (suggestions.length <= 3) {
+        this.messages = this.fullMessages;
+      }
+
+      // show 3 items on the first display if greater than 3
+      else if (suggestions.length > 3) {
+        this.showAllButtonDisplay = true;
+
+        if (this.showAllSugs) {
+          this.messages = this.fullMessages;
+        } else {
+          const newThreeSugs = suggestions.slice(0, 3);
+          this.messages = [...this.messages, ...newThreeSugs];
+        }
+      }
+    }
+  }
+
+  showAll() {
+    this.showAllSugs = true;
+    this.showAllButtonDisplay = false;
+    this.messages = this.fullMessages;
+
+    this.scrollToBottom();
+  }
+
+  closeConversation() {
+    this._subscription.add(
+      this._convoService.closeConvo(this.conversationId).subscribe((res) => {
+        const thankful = {
+          content: 'Cảm ơn bạn đã quan tâm tới Luật Cảnh Sát Biển',
+          type: 'text',
+        };
+
+        this.messages = [...this.messages, thankful];
+
+        this.scrollToBottom();
+        
+        setTimeout(() => {
+          localStorage.clear();
+          this._router.navigate(['']);
+        }, 1000);
+      })
+    );
+  }
+
+  showNotFoundMessage() {
+    const notFoundMsg = {
+      content:
+        'Xin lỗi, câu hỏi của Bạn ngoài phạm vi "Hỏi đáp tự động Luật Cảnh sát biển Việt Nam"',
+      type: 'text',
+    };
+
+    this.messages = [...this.messages, notFoundMsg];
   }
 
   trackByIndex(index: number): number {
@@ -64,6 +136,8 @@ export class LiveChatComponent implements OnInit {
   }
 
   sendMessage() {
+    this.showAllButtonDisplay = false;
+
     if (this.key) {
       this._service.sendMessage({
         content: this.key,
@@ -93,6 +167,8 @@ export class LiveChatComponent implements OnInit {
   }
 
   getSugAnswer(suggestion: Suggestion) {
+    this.showAllButtonDisplay = false;
+
     const { title, answers } = suggestion;
 
     this._service.selectQuestion({
@@ -114,6 +190,7 @@ export class LiveChatComponent implements OnInit {
     this.messages = [...this.messages, pickedSuggestion, ...findingAnswers];
 
     this.removeOldSuggestions();
+    this.scrollToBottom();
   }
 
   removeOldSuggestions() {

@@ -42,8 +42,6 @@
       }
 
       .left-buttons {
-        display: none;
-
         > * {
           margin: 0 5px;
         }
@@ -55,6 +53,11 @@
           width: 1rem;
           border-radius: 50%;
           @include centerFlex;
+
+          &:hover {
+            cursor: pointer;
+            background: silver;
+          }
         }
 
         .minimize {
@@ -109,6 +112,22 @@
         }
       }
     }
+
+    .show-all {
+      position: fixed;
+      bottom: 3.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.5rem 1rem;
+      background: white;
+      border-radius: 5px;
+      box-shadow: 1px 1px 8px #888;
+
+      &:hover {
+        cursor: pointer;
+        background-color: mintcream;
+      }
+    }
   }
 
   .chat-bar {
@@ -122,6 +141,7 @@
     width: -webkit-fill-available;
 
     > input {
+      width: calc(100% - 38px);
       border: none;
       outline: none !important;
     }

@@ -21,4 +21,10 @@ export class ConvoService {
   createConvo(user: IGuestConvo): Observable<any> {
     return this._http.post(`${environment.domain}/api/v1/conversations`, user);
   }
+
+  closeConvo(convoId: string): Observable<any> {
+    return this._http.delete(
+      `${environment.domain}/api/v1/conversations/${convoId}`
+    );
+  }
 }
