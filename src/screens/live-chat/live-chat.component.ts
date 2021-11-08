@@ -112,7 +112,7 @@ export class LiveChatComponent implements OnInit {
         this.messages = [...this.messages, thankful];
 
         this.scrollToBottom();
-        
+
         setTimeout(() => {
           localStorage.clear();
           this._router.navigate(['']);
@@ -136,7 +136,7 @@ export class LiveChatComponent implements OnInit {
   }
 
   sendMessage() {
-    this.showAllButtonDisplay = false;
+    this.resetShowAll();
 
     if (this.key) {
       this._service.sendMessage({
@@ -166,8 +166,13 @@ export class LiveChatComponent implements OnInit {
     }, 0);
   }
 
-  getSugAnswer(suggestion: Suggestion) {
+  resetShowAll() {
     this.showAllButtonDisplay = false;
+    this.showAllSugs = false;
+  }
+
+  getSugAnswer(suggestion: Suggestion) {
+    this.resetShowAll();
 
     const { title, answers } = suggestion;
 
