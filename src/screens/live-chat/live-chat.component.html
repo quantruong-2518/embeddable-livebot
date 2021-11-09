@@ -52,8 +52,13 @@
       </ng-container>
     </div>
 
-    <button *ngIf="showAllButtonDisplay" (click)="showAll()" class="show-all">
+    <button
+      (click)="showAll()"
+      class="show-all"
+      [class]="showAllButtonDisplay ? 'visible' : null"
+    >
       Hiển thị hết {{ suggestionsLength }} kết quả
+      <i class="fas fa-chevron-down"></i>
     </button>
   </div>
 

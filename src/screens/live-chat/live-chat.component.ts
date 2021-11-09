@@ -53,10 +53,13 @@ export class LiveChatComponent implements OnInit {
   listenSuggestions() {
     this._subscription.add(
       this._service.getMessage().subscribe((suggestions: Suggestion[]) => {
+        const suggestionsFull = suggestions.map((sug) => {
+          return { ...sug, type: 'suggestion' };
+        });
         this.suggestionsLength = suggestions.length;
 
         if (suggestions.length) {
-          this.postMessageToScreen(suggestions);
+          this.postMessageToScreen(suggestionsFull);
         } else {
           this.showNotFoundMessage();
         }
@@ -91,6 +94,8 @@ export class LiveChatComponent implements OnInit {
         }
       }
     }
+
+    console.log('this.messages', this.messages);
   }
 
   showAll() {
