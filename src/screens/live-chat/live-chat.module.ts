@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { LiveChatRoutingModule } from './live-chat-routing.module';
 import { HttpClientModule } from '@angular/common/http';
+import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 import { LiveChatComponent } from './live-chat.component';
 
@@ -11,7 +12,13 @@ import { ConvoService } from 'src/services/convo.service';
 
 @NgModule({
   declarations: [LiveChatComponent],
-  imports: [CommonModule, FormsModule, LiveChatRoutingModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    LiveChatRoutingModule,
+    HttpClientModule,
+    IvyCarouselModule,
+  ],
   providers: [ChatService, ConvoService],
   exports: [LiveChatComponent],
 })

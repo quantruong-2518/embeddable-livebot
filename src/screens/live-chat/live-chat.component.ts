@@ -15,13 +15,11 @@ export class LiveChatComponent implements OnInit {
   messages: Array<any> = [
     {
       type: 'text',
-      from: 1,
       content: `Chào mừng  đến với chatbot của Cảnh sát biển Việt Nam`,
     },
     {
       content: 'Chúng tôi luôn sẵn sàng giải đáp mọi thắc mắc của bạn',
       type: 'text',
-      from: 1,
     },
   ];
 
@@ -31,6 +29,45 @@ export class LiveChatComponent implements OnInit {
   showAllSugs = false;
   suggestionsLength = 0;
   fullMessages = [];
+
+  cards = [
+    {
+      image:
+        'https://external.xx.fbcdn.net/safe_image.php?d=AQH9moTGtxAW3b2N&url=https%3A%2F%2Fmedia.botbanhang.vn%2Fuploads%2F60bc6f802c112d00122010a2%2F0dc940e4-49e5-4f8b-8bbb-c07193efed3f.jpg&ext=emg0&_nc_oe=6f13c&_nc_sid=f281cc&ccb=3-5&_nc_hash=AQEWo_k7o2UCJWV3',
+      title: 'Nhiệm vụ, quyền hạn của Cảnh sát biển Việt Nam',
+      category: '🇻🇳 Cảnh sát biển Việt Nam',
+    },
+    {
+      image:
+        'https://external.xx.fbcdn.net/safe_image.php?d=AQH9moTGtxAW3b2N&url=https%3A%2F%2Fmedia.botbanhang.vn%2Fuploads%2F60bc6f802c112d00122010a2%2F0dc940e4-49e5-4f8b-8bbb-c07193efed3f.jpg&ext=emg0&_nc_oe=6f13c&_nc_sid=f281cc&ccb=3-5&_nc_hash=AQEWo_k7o2UCJWV3',
+      title: 'Nhiệm vụ, quyền hạn của Cảnh sát biển Việt Nam',
+      category: '🇻🇳 Cảnh sát biển Việt Nam',
+    },
+    {
+      image:
+        'https://external.xx.fbcdn.net/safe_image.php?d=AQH9moTGtxAW3b2N&url=https%3A%2F%2Fmedia.botbanhang.vn%2Fuploads%2F60bc6f802c112d00122010a2%2F0dc940e4-49e5-4f8b-8bbb-c07193efed3f.jpg&ext=emg0&_nc_oe=6f13c&_nc_sid=f281cc&ccb=3-5&_nc_hash=AQEWo_k7o2UCJWV3',
+      title: 'Nhiệm vụ, quyền hạn của Cảnh sát biển Việt Nam',
+      category: '🇻🇳 Cảnh sát biển Việt Nam',
+    },
+    {
+      image:
+        'https://external.xx.fbcdn.net/safe_image.php?d=AQH9moTGtxAW3b2N&url=https%3A%2F%2Fmedia.botbanhang.vn%2Fuploads%2F60bc6f802c112d00122010a2%2F0dc940e4-49e5-4f8b-8bbb-c07193efed3f.jpg&ext=emg0&_nc_oe=6f13c&_nc_sid=f281cc&ccb=3-5&_nc_hash=AQEWo_k7o2UCJWV3',
+      title: 'Nhiệm vụ, quyền hạn của Cảnh sát biển Việt Nam',
+      category: '🇻🇳 Cảnh sát biển Việt Nam',
+    },
+    {
+      image:
+        'https://external.xx.fbcdn.net/safe_image.php?d=AQH9moTGtxAW3b2N&url=https%3A%2F%2Fmedia.botbanhang.vn%2Fuploads%2F60bc6f802c112d00122010a2%2F0dc940e4-49e5-4f8b-8bbb-c07193efed3f.jpg&ext=emg0&_nc_oe=6f13c&_nc_sid=f281cc&ccb=3-5&_nc_hash=AQEWo_k7o2UCJWV3',
+      title: 'Nhiệm vụ, quyền hạn của Cảnh sát biển Việt Nam',
+      category: '🇻🇳 Cảnh sát biển Việt Nam',
+    },
+    {
+      image:
+        'https://external.xx.fbcdn.net/safe_image.php?d=AQH9moTGtxAW3b2N&url=https%3A%2F%2Fmedia.botbanhang.vn%2Fuploads%2F60bc6f802c112d00122010a2%2F0dc940e4-49e5-4f8b-8bbb-c07193efed3f.jpg&ext=emg0&_nc_oe=6f13c&_nc_sid=f281cc&ccb=3-5&_nc_hash=AQEWo_k7o2UCJWV3',
+      title: 'Nhiệm vụ, quyền hạn của Cảnh sát biển Việt Nam',
+      category: '🇻🇳 Cảnh sát biển Việt Nam',
+    },
+  ];
 
   private readonly _subscription = new Subscription();
 
@@ -94,8 +131,6 @@ export class LiveChatComponent implements OnInit {
         }
       }
     }
-
-    console.log('this.messages', this.messages);
   }
 
   showAll() {
@@ -104,6 +139,17 @@ export class LiveChatComponent implements OnInit {
     this.messages = this.fullMessages;
 
     this.scrollToBottom();
+  }
+
+  clickOnCell(title: string) {
+    const message = {
+      type: 'text',
+      from: 1,
+      content: title,
+    };
+
+    this._service.sendMessage(message);
+    this.messages.push(message);
   }
 
   closeConversation() {

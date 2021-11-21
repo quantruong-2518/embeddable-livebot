@@ -20,6 +20,24 @@
 
   <!-- CONVERSATION  -->
   <div class="conversation">
+    <carousel
+      height="300"
+      overflowCellsLimit="3"
+      transitionTimingFunction="ease-in-out"
+      counter="true"
+      lightDOM="true"
+      cellsToShow="1.5"
+    >
+      <div *ngFor="let card of cards" class="carousel-cell">
+        <img [src]="card.image" />
+        <div class="content">
+          <b>{{ card.title }}</b>
+          <small>{{ card.category }}</small>
+        </div>
+        <button (click)="clickOnCell(card.title)">Hỏi - đáp ngay</button>
+      </div>
+    </carousel>
+
     <div
       class="msg"
       *ngFor="let msg of messages; index as idx; trackBy: trackByIndex"
