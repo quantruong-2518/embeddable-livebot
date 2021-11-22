@@ -69,7 +69,7 @@ export class LiveChatComponent implements OnInit {
   //   },
   // ];
   cards = [];
-  
+
   private readonly _subscription = new Subscription();
 
   constructor(
@@ -159,7 +159,6 @@ export class LiveChatComponent implements OnInit {
     };
 
     this._service.sendMessage(message);
-    this.messages.push(message);
   }
 
   closeConversation() {

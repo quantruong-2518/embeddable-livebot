@@ -15,8 +15,8 @@
 
   .header {
     width: -webkit-fill-available;
-    box-shadow: $box-shadow;
-    background-color: white;
+    background-color: #0a7cff;
+    box-shadow: 1px 1px 5px #345f81;
 
     &-top,
     &-search {
@@ -30,15 +30,17 @@
 
       .brand-name {
         display: flex;
-        flex-direction: column;
+        height: 100%;
+        align-items: center;
 
-        > b {
-          margin-bottom: 5px;
+        > img {
+          margin-right: 10px;
+          height: 100%;
         }
 
-        > small {
-          font-size: 0.8rem;
-          color: #9e9e9e;
+        > b {
+          color: white;
+          font-size: 1.125rem;
         }
       }
 
@@ -59,6 +61,10 @@
             cursor: pointer;
             background: silver;
           }
+        }
+
+        .dropdown {
+          background-color: #e5e7ea;
         }
 
         .minimize {
@@ -180,6 +186,7 @@
         flex-direction: column;
         padding: 0 0.5rem;
         margin-bottom: 10px;
+        align-self: flex-start;
 
         > b {
           margin-bottom: 5px;
@@ -193,7 +200,7 @@
       }
 
       > button {
-        background-color: #E4E6EB;
+        background-color: #e4e6eb;
         padding: 0.5rem 1rem;
         margin-bottom: 0.5rem;
         border-radius: 7px;
@@ -201,6 +208,11 @@
         outline: none;
         font-weight: bold;
         border: none;
+
+        &:hover {
+          background-color: #8990a2;
+          cursor: pointer;
+        }
       }
     }
   }
