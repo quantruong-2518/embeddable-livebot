@@ -29,10 +29,12 @@
       cellsToShow="1.5"
     >
       <div *ngFor="let card of cards" class="carousel-cell">
-        <img [src]="card.image" />
+        <img
+          src="https://external.xx.fbcdn.net/safe_image.php?d=AQH9moTGtxAW3b2N&url=https%3A%2F%2Fmedia.botbanhang.vn%2Fuploads%2F60bc6f802c112d00122010a2%2F0dc940e4-49e5-4f8b-8bbb-c07193efed3f.jpg&ext=emg0&_nc_oe=6f13c&_nc_sid=f281cc&ccb=3-5&_nc_hash=AQEWo_k7o2UCJWV3"
+        />
         <div class="content">
           <b>{{ card.title }}</b>
-          <small>{{ card.category }}</small>
+          <small>🇻🇳 Cảnh sát biển Việt Nam</small>
         </div>
         <button (click)="clickOnCell(card.title)">Hỏi - đáp ngay</button>
       </div>

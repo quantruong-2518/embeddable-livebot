@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 // import { Socket } from 'ngx-socket-io';
@@ -11,7 +12,7 @@ import { SuggestionAnswer } from 'src/utils/model/suggestion.model';
 export class ChatService {
   private socket: Socket;
 
-  constructor() {
+  constructor(private _http: HttpClient) {
     const conversationToken = localStorage.getItem('conversationToken');
     if (conversationToken) {
       this.socket = io(environment.domain, {
@@ -41,5 +42,9 @@ export class ChatService {
     answerContent: string;
   }) {
     this.socket.emit('select-question', message);
+  }
+
+  getFeatureQuestions(): Observable<any> {
+    return this._http.get(`${environment.domain}/api/v1/questions/feature`);
   }
 }
