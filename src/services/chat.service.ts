@@ -47,4 +47,8 @@ export class ChatService {
   getFeatureQuestions(): Observable<any> {
     return this._http.get(`${environment.domain}/api/v1/questions/feature`);
   }
+
+  getSensitivelyWords(): Observable<any> {
+    return this._http.get(`${environment.domain}/api/v1/message-blocked`);
+  }
 }

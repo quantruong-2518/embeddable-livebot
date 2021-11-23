@@ -70,6 +70,8 @@ export class LiveChatComponent implements OnInit {
   // ];
   cards = [];
 
+  blockedKeywords = [];
+
   private readonly _subscription = new Subscription();
 
   constructor(
@@ -83,6 +85,15 @@ export class LiveChatComponent implements OnInit {
   ngOnInit(): void {
     this.listenSuggestions();
     this.getFeatureQuestions();
+    this.getSensitivelyWords();
+  }
+
+  getSensitivelyWords() {
+    this._subscription.add(
+      this._service.getSensitivelyWords().subscribe((badKeywords) => {
+        this.blockedKeywords = badKeywords.data.items.map((e) => e.title);
+      })
+    );
   }
 
   getFeatureQuestions() {
@@ -161,6 +172,11 @@ export class LiveChatComponent implements OnInit {
     this._service.sendMessage(message);
   }
 
+  isSensitiveWord(key: string): boolean {
+    const regex = new RegExp(this.blockedKeywords.join('|'));
+    return regex.test(key);
+  }
+
   closeConversation() {
     this._subscription.add(
       this._convoService.closeConvo(this.conversationId).subscribe((res) => {
@@ -198,21 +214,27 @@ export class LiveChatComponent implements OnInit {
   sendMessage() {
     this.resetShowAll();
 
-    if (this.key) {
-      this._service.sendMessage({
-        content: this.key,
-      });
+    let initMessage = {
+      type: 'text',
+      from: 1,
+      content: this.key,
+    };
 
-      const initMessage = {
-        type: 'text',
-        from: 1,
-        content: this.key,
-      };
+    if (this.key) {
+      if (this.isSensitiveWord(this.key)) {
+        initMessage.content =
+          'Phát hiện ngôn từ không phù hợp, vui lòng nhập lại';
+        initMessage.from = 2;
+      } else {
+        this._service.sendMessage({
+          content: this.key,
+        });
+      }
+
       this.messages.push(initMessage);
       this.key = '';
 
       this.removeOldSuggestions();
-
       this.scrollToBottom();
     }
   }
