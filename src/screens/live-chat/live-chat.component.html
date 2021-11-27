@@ -20,26 +20,6 @@
 
   <!-- CONVERSATION  -->
   <div class="conversation">
-    <carousel
-      height="300"
-      overflowCellsLimit="3"
-      transitionTimingFunction="ease-in-out"
-      counter="true"
-      lightDOM="true"
-      cellsToShow="1.5"
-    >
-      <div *ngFor="let card of cards" class="carousel-cell">
-        <img
-          src="https://external.xx.fbcdn.net/safe_image.php?d=AQH9moTGtxAW3b2N&url=https%3A%2F%2Fmedia.botbanhang.vn%2Fuploads%2F60bc6f802c112d00122010a2%2F0dc940e4-49e5-4f8b-8bbb-c07193efed3f.jpg&ext=emg0&_nc_oe=6f13c&_nc_sid=f281cc&ccb=3-5&_nc_hash=AQEWo_k7o2UCJWV3"
-        />
-        <div class="content">
-          <b>{{ card.title }}</b>
-          <small>🇻🇳 Cảnh sát biển Việt Nam</small>
-        </div>
-        <button (click)="clickOnCell(card.title)">Hỏi - đáp ngay</button>
-      </div>
-    </carousel>
-
     <div
       class="msg"
       *ngFor="let msg of messages; index as idx; trackBy: trackByIndex"
@@ -53,8 +33,58 @@
         >
           {{ msg.title }}
         </div>
-        <div class="msg-options" *ngSwitchCase="'options'">day la options</div>
-        <div class="msg-image" *ngSwitchCase="'image'">day la image</div>
+
+        <!-- RECOMMEND BOX  -->
+        <div class="msg-sug__options" *ngSwitchCase="'suggestion-selector'">
+          <img [src]="msg.data.image" alt="img" />
+          <div
+            (click)="selectCarousel(0, msg.data.carousels[0].content)"
+            class="carousel1"
+          >
+            Luật cảnh sát biển việt nam
+          </div>
+          <div
+            (click)="selectCarousel(1, msg.data.carousels[1].content)"
+            class="carousel2"
+          >
+            Các Thông tin khá
+          </div>
+          <div class="custom-question">Do it yourself</div>
+        </div>
+
+        <!-- CAROUSEL MESSAGE -->
+        <carousel
+          *ngSwitchCase="'carousel'"
+          class="msg-carousel"
+          height="350"
+          width="350"
+          borderRadius="8"
+          overflowCellsLimit="3"
+          transitionTimingFunction="ease-in-out"
+          counter="true"
+          lightDOM="true"
+          cellsToShow="1.2"
+        >
+          <div class="carousel-cell" *ngFor="let card of msg.data.cards">
+            <img [src]="card.image" alt="img" />
+            <small>🇻🇳 {{ msg.data.content }}</small>
+            <div
+              class="question"
+              *ngFor="let question of card.data"
+              (click)="showQuestionList(question)"
+            >
+              {{ question.content }}
+            </div>
+          </div>
+        </carousel>
+
+        <!-- ANSWER CONFIRM BOX MESSAGE  -->
+        <div class="msg-confirm" *ngSwitchCase="'answer-confirm'">
+          <span class="content">{{ msg.content }}</span>
+          <div (click)="confirmToGetAnswer(msg.content)">Trả lời ngay</div>
+        </div>
+
+        <!-- TEXT MESSAGE  -->
         <div
           class="msg-txt"
           [class.my-message]="msg.from === 1"
@@ -62,6 +92,7 @@
         >
           {{ msg.content }}
         </div>
+
         <div
           class="msg-txt"
           [class.my-message]="msg.from === 1"

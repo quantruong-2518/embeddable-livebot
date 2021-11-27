@@ -93,7 +93,7 @@
 
       > div {
         border-radius: 5px;
-        padding: 0.5rem;
+        padding: 0.5rem 1rem;
         background: $bg-primary;
         color: $txt-primary;
         word-break: break-word;
@@ -107,6 +107,28 @@
         }
       }
 
+      &-confirm {
+        background: #f0f2f5 !important;
+        color: black !important;
+
+        > div {
+          padding: 10px;
+          margin: 5px;
+          background-color: #e4e6eb;
+          color: black;
+          text-transform: uppercase;
+          font-weight: bold;
+          text-align: center;
+          font-size: 0.75rem;
+          width: 85%;
+          border-radius: 5px;
+        }
+
+        > span { 
+          margin-bottom: 1rem;
+        }
+      }
+
       &-suggestion {
         background-color: gainsboro !important;
         box-shadow: 1px 1px 5px #888;
@@ -117,6 +139,41 @@
         &:hover {
           transform: scale(1.1);
         }
+      }
+
+      &-sug__options {
+        max-width: 20rem !important;
+        background-color: rgb(241, 240, 240) !important;
+
+        > * {
+          text-align: center;
+          font-size: 0.75rem;
+        }
+
+        > img {
+          width: 100%;
+          border-radius: 5px;
+        }
+
+        .carousel1,
+        .carousel2,
+        .custom-question {
+          padding: 10px;
+          background-color: #e4e6eb;
+          color: black;
+          margin: 0.5rem 0;
+          text-transform: uppercase;
+          font-weight: bold;
+          border-radius: 8px;
+
+          &:hover {
+            cursor: pointer;
+            background-color: #d0d5df;
+          }
+        }
+      }
+
+      &-carousel {
       }
     }
 
@@ -167,17 +224,38 @@
 
 :host::ng-deep carousel {
   .carousel-container > .carousel-cells {
+    display: flex;
+    align-items: flex-end;
+
     > .carousel-cell {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-between;
+      justify-content: flex-start;
       background-color: #f0f2f5;
       border-radius: 5px;
 
       > img {
-        height: 55%;
+        height: 48%;
         object-fit: cover;
+      }
+
+      > small {
+        align-self: flex-start;
+        margin: 0.75rem 0 0.75rem 1.1rem;
+      }
+
+      .question {
+        padding: 10px;
+        margin: 5px;
+        background-color: #e4e6eb;
+        color: black;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+        font-size: 0.75rem;
+        width: 85%;
+        border-radius: 5px;
       }
 
       .content {
