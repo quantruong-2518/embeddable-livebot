@@ -44,6 +44,8 @@ export class LiveChatComponent implements OnInit {
 
   blockedKeywords = [];
 
+  showSearchBar = false;
+
   private readonly _subscription = new Subscription();
 
   constructor(
@@ -81,6 +83,8 @@ export class LiveChatComponent implements OnInit {
   }
 
   selectCarousel(index: number, content: string) {
+    this.showSearchBar = false;
+
     const message = {
       type: 'text',
       from: 1,
@@ -107,6 +111,7 @@ export class LiveChatComponent implements OnInit {
       const box = {
         type: 'answer-confirm',
         content: q.content,
+        answer: q.answer,
       };
       confirmBoxes.push(box);
     }
@@ -287,13 +292,19 @@ export class LiveChatComponent implements OnInit {
     this.scrollToBottom();
   }
 
-  confirmToGetAnswer(content: string) {
-    this._subscription.add(
-      this._service.sendMessage({
-        content,
-      })
-    );
+  confirmToGetAnswer(question: IQuestion) {
+    const message = {
+      type: 'text',
+      from: 1,
+      content: question.content,
+    };
 
+    const answer = {
+      type: 'text',
+      content: question.answer,
+    };
+
+    this.messages = [...this.messages, message, answer];
     this.scrollToBottom();
   }
 

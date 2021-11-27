@@ -18,4 +18,5 @@ export interface ICard {
 
 export interface IQuestion {
   content: string;
+  answer?: string
 }

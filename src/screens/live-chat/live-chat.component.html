@@ -47,9 +47,11 @@
             (click)="selectCarousel(1, msg.data.carousels[1].content)"
             class="carousel2"
           >
-            Các Thông tin khá
+            Các Thông tin khác
           </div>
-          <div class="custom-question">Do it yourself</div>
+          <div (click)="showSearchBar = true" class="custom-question">
+            Nhập câu hỏi trực tiếp
+          </div>
         </div>
 
         <!-- CAROUSEL MESSAGE -->
@@ -81,7 +83,7 @@
         <!-- ANSWER CONFIRM BOX MESSAGE  -->
         <div class="msg-confirm" *ngSwitchCase="'answer-confirm'">
           <span class="content">{{ msg.content }}</span>
-          <div (click)="confirmToGetAnswer(msg.content)">Trả lời ngay</div>
+          <div (click)="confirmToGetAnswer(msg)">Trả lời ngay</div>
         </div>
 
         <!-- TEXT MESSAGE  -->
@@ -89,13 +91,13 @@
           class="msg-txt"
           [class.my-message]="msg.from === 1"
           *ngSwitchCase="text || null"
-        >
-          {{ msg.content }}
-        </div>
+          [innerHTML]="msg.content"
+        ></div>
 
         <div
           class="msg-txt"
           [class.my-message]="msg.from === 1"
+          [innerHTML]="msg.content"
           *ngSwitchDefault
         >
           {{ msg.content }}
@@ -114,7 +116,7 @@
   </div>
 
   <!-- CHAT-BAR  -->
-  <div class="chat-bar">
+  <div class="chat-bar" [class]="showSearchBar ? 'show' : null">
     <input
       [(ngModel)]="key"
       (keyup.enter)="sendMessage()"

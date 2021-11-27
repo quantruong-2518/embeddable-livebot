@@ -1,16 +1,29 @@
 import { IQuestion } from 'src/utils/model/question-feature.model';
 
 export const TOPIC1_QUESTIONS: IQuestion[] = [
-  { content: 'Vị trí của Cảnh sát biển Việt Nam được quy định như thế nào?' },
-  { content: 'Chức năng của Cảnh sát biển Việt Nam là gì?' },
   {
-    content: 'Các nguyên tắc tổ chức và hoạt động của Cảnh sát biển Việt Nam?',
+    content: 'Vị trí của Cảnh sát biển Việt Nam được quy định như thế nào?',
+    answer:
+      'Cảnh sát biển Việt Nam là lực lượng vũ trang nhân dân, lực lượng chuyên trách của Nhà nước, làm nòng cốt thực thi pháp luật và bảo vệ an ninh quốc gia, trật tự, an toàn trên biển (Khoản 1 Điều 3 Luật Cảnh sát biển Việt Nam).',
   },
   {
+    content: 'Chức năng của Cảnh sát biển Việt Nam là gì?',
+    answer:
+      'Cảnh sát biển Việt Nam có chức năng tham mưu cho Bộ trưởng Bộ quốc phòng ban hành ban hành theo thẩm quyền hoặc đề xuất với Đảng, Nhà nước về chính sách, pháp luật bảo vệ an ninh quốc gia, trật tự, an toàn trên biển; bảo vệ chủ quyền, quyền chủ quyền, quyền tài phán quốc gia trong vùng biển Việt Nam; quản lý về an ninh, trật tự, an toàn và đảm bảo việc chấp hành pháp luật Việt Nam, điều ước quốc tế mà nước Cộng hòa xã hội chủ nghĩa Việt Nam là thành viên, thỏa thuận quốc tế theo thẩm quyền (Khoản 2 Điều 3 Luật Cảnh sát biển Việt Nam).',
+  },
+  {
+    content: 'Các nguyên tắc tổ chức và hoạt động của Cảnh sát biển Việt Nam?',
+    answer:
+      'Có 06 nguyên tắc tổ chức và hoạt động của Cảnh sát biển Việt Nam, gồm:<br>1. Đặt dưới sự lãnh đạo tuyệt đối, trực tiếp về mọi mặt của Đảng Cộng sản Việt Nam, sự thống lĩnh của Chủ tịch nước, sự thống nhất quản lý nà nước của Chính phủ và sự chỉ đạo, chỉ huy trực tiếp của Bộ trưởng Bộ Quốc phòng.<br>2. Tuân thủ Hiến pháp và pháp luật Việt Nam, điều ước quốc tế mà nước Cộng hòa xã hội chủ nghĩa Việt Nam là thành viên.<br>3. Tổ chức tập trung, thống nhất theo phân cấp từ Bộ Tư lệnh Cảnh sát biển Việt Nam đến đơn vị cấp cơ sở.<br>4. Chủ động phòng ngừa, phát hiện, ngăn chặn, đấu tranh và xử lý hành vi vi phạm pháp luật.<br>5. Kết hợp nhiệm vụ bảo vệ chủ quyền, quyền chủ quyền, quyền tài phán quốc gia, quản lý an ninh, trật tự, an toàn trên biển với phát triển kinh tế biển.<br>6. Dựa vào Nhân dân, phát huy sức mạnh của Nhân dân và chịu sự giám sát của Nhân dân <br>(Điều 4 Luật Cảnh sát biển Việt Nam).',
+  },
+  {
+    answer:
+      'Luật Cảnh sát biển Việt Nam quy định vị trí, chức năng, nhiệm vụ, quyền hạn, tổ chức và hoạt động của Cảnh sát biển Việt Nam; chế độ, chính sách đối với Cảnh sát biển Việt Nam; trách nhiệm của cơ quan, tổ chức, cá nhân có liên quan.<br>(Điều 1 Luật Cảnh sát biển Việt Nam).',
     content:
       'Luật Cảnh sát biển Việt Nam quy định những gì? (Hoặc) Phạm vi điều chỉnh của Luật Cảnh sát biển Việt Nam?',
   },
   {
+    answer: 'Ngày 03/12/2018.',
     content:
       'Luật Cảnh sát biển Việt Nam được chủ tịch nước CHXHCN Việt Nam công bố vào ngày, tháng, năm nào?',
   },
