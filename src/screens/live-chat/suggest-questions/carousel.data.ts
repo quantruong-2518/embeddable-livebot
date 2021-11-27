@@ -47,7 +47,7 @@ export const CAROUSEL1: ICarousel = {
 };
 
 export const CAROUSEL2: ICarousel = {
-  content: 'Các Thông tin khác',
+  content: 'Các thông tin khác',
   cards: [
     {
       image: '../../assets/images/sugession-card/image5.jpg',
