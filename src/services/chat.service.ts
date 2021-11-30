@@ -51,4 +51,8 @@ export class ChatService {
   getSensitivelyWords(): Observable<any> {
     return this._http.get(`${environment.domain}/api/v1/message-blocked`);
   }
+
+  getCardsOnCarousel(type: number): Observable<any> {
+    return this._http.get(`${environment.domain}/api/v1/cards?type=${type}`);
+  }
 }

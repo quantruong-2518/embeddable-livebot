@@ -46,6 +46,9 @@ export class LiveChatComponent implements OnInit {
 
   showSearchBar = false;
 
+  carousel1 = [];
+  carousel2 = [];
+
   private readonly _subscription = new Subscription();
 
   constructor(
@@ -60,6 +63,20 @@ export class LiveChatComponent implements OnInit {
     this.listenSuggestions();
     this.getFeatureQuestions();
     this.getSensitivelyWords();
+    this.getBothOfCarousels();
+  }
+
+  getBothOfCarousels() {
+    this._subscription.add(
+      this._service
+        .getCardsOnCarousel(1)
+        .subscribe((crs1) => (this.carousel1 = crs1.data))
+    );
+    this._subscription.add(
+      this._service
+        .getCardsOnCarousel(2)
+        .subscribe((crs2) => (this.carousel2 = crs2.data))
+    );
   }
 
   getSensitivelyWords() {
@@ -82,41 +99,62 @@ export class LiveChatComponent implements OnInit {
     this._subscription.unsubscribe();
   }
 
-  selectCarousel(index: number, content: string) {
+  selectCarousel(index: number) {
     this.showSearchBar = false;
+    let message;
 
-    const message = {
-      type: 'text',
-      from: 1,
-      content,
-    };
-    const carousel = {
-      type: 'carousel',
-      data: containerCard.carousels[index],
-    };
+    if (
+      (!this.carousel1.length && index === 1) ||
+      (!this.carousel2.length && index === 2)
+    ) {
+      message = {
+        type: 'text',
+        content: 'Chưa cỏ thẻ nào cho nội dung này',
+      };
 
-    this.messages = [...this.messages, message, carousel];
+      this.messages = [...this.messages, message];
+    } else {
+      message = {
+        type: 'text',
+        from: 1,
+        content:
+          index === 1 ? 'Luật cảnh sát biển việt nam' : 'Các Thông tin khác',
+      };
+      const carousel = {
+        type: 'carousel',
+        data: index === 1 ? this.carousel1 : this.carousel2,
+        content:
+          index === 1 ? 'Luật cảnh sát biển việt nam' : 'Các Thông tin khác',
+      };
+
+      this.messages = [...this.messages, message, carousel];
+    }
+
     this.scrollToBottom();
   }
 
-  showQuestionList(question: { content: string; data: Array<IQuestion> }) {
+  showSB() {
+    this.showSearchBar = true;
+  }
+
+  confirmBoxes = [];
+  showQuestionList(topic: { content: string; questions: Array<IQuestion> }) {
     const message = {
       type: 'text',
       from: 1,
-      content: question.content,
+      content: topic.content,
     };
 
-    let confirmBoxes = [];
-    for (const q of question.data) {
+    for (const q of topic.questions) {
       const box = {
         type: 'answer-confirm',
-        content: q.content,
-        answer: q.answer,
+        content: q.title,
+        answer: q.answers[0].content,
       };
-      confirmBoxes.push(box);
+      this.confirmBoxes.push(box);
     }
 
-    this.messages = [...this.messages, message, ...confirmBoxes];
+    this.messages = [...this.messages, message, ...this.confirmBoxes];
     this.scrollToBottom();
   }
 
@@ -292,7 +330,7 @@ export class LiveChatComponent implements OnInit {
     this.scrollToBottom();
   }
 
-  confirmToGetAnswer(question: IQuestion) {
+  confirmToGetAnswer(question) {
     const message = {
       type: 'text',
       from: 1,
@@ -304,7 +342,29 @@ export class LiveChatComponent implements OnInit {
       content: question.answer,
     };
 
+    const another = {
+      type: 'another-question',
+    };
+
     this.messages = [...this.messages, message, answer];
+
+    this.confirmBoxes = this.confirmBoxes.filter(
+      (e) => e.content !== question.content
+    );
+
+    if (this.confirmBoxes.length) {
+      const timeOut = setTimeout(() => {
+        this.messages = [...this.messages, another];
+        this.scrollToBottom();
+      }, 500);
+    }
+
+    this.scrollToBottom();
+  }
+
+  pickAnother() {
+    this.showSearchBar = false;
+    this.messages = [...this.messages, ...this.confirmBoxes];
     this.scrollToBottom();
   }
 

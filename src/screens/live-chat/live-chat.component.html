@@ -37,19 +37,13 @@
         <!-- RECOMMEND BOX  -->
         <div class="msg-sug__options" *ngSwitchCase="'suggestion-selector'">
           <img [src]="msg.data.image" alt="img" />
-          <div
-            (click)="selectCarousel(0, msg.data.carousels[0].content)"
-            class="carousel1"
-          >
+          <div (click)="selectCarousel(1)" class="carousel1">
             Luật cảnh sát biển việt nam
           </div>
-          <div
-            (click)="selectCarousel(1, msg.data.carousels[1].content)"
-            class="carousel2"
-          >
+          <div (click)="selectCarousel(2)" class="carousel2">
             Các Thông tin khác
           </div>
-          <div (click)="showSearchBar = true" class="custom-question">
+          <div (click)="showSearchBar()" class="custom-question">
             Nhập câu hỏi trực tiếp
           </div>
         </div>
@@ -67,15 +61,18 @@
           lightDOM="true"
           cellsToShow="1.2"
         >
-          <div class="carousel-cell" *ngFor="let card of msg.data.cards">
-            <img [src]="card.image" alt="img" />
-            <small>🇻🇳 {{ msg.data.content }}</small>
+          <div class="carousel-cell" *ngFor="let card of msg.data">
+            <img
+              [src]="'https://trueoutsourcing.com/' + card.image"
+              alt="img"
+            />
+            <small>🇻🇳 {{ msg.content }}</small>
             <div
               class="question"
-              *ngFor="let question of card.data"
-              (click)="showQuestionList(question)"
+              *ngFor="let topic of card.topics"
+              (click)="showQuestionList(topic)"
             >
-              {{ question.content }}
+              {{ topic.content }}
             </div>
           </div>
         </carousel>
@@ -84,6 +81,14 @@
         <div class="msg-confirm" *ngSwitchCase="'answer-confirm'">
           <span class="content">{{ msg.content }}</span>
           <div (click)="confirmToGetAnswer(msg)">Trả lời ngay</div>
+        </div>
+
+        <!-- RECOMMEND ANOTHER QUESTION  -->
+        <div class="msg-another" *ngSwitchCase="'another-question'">
+          <div (click)="pickAnother()"><div>Chọn câu hỏi tiếp</div></div>
+          <div (click)="showSB()" class="custom-question">
+            Nhập câu hỏi mới
+          </div>
         </div>
 
         <!-- TEXT MESSAGE  -->
