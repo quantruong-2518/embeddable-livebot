@@ -134,7 +134,8 @@ export class LiveChatComponent implements OnInit {
   }
 
   showSB() {
-    this.showSearchBar = true;
+    const chatBar = document.getElementById('chat-bar');
+    chatBar.focus();
   }
 
   confirmBoxes = [];

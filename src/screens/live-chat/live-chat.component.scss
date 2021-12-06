@@ -260,9 +260,20 @@
         object-fit: cover;
       }
 
-      > small {
+      > .carousel-cell__name {
         align-self: flex-start;
-        margin: 0.75rem 0 0.75rem 1.1rem;
+        margin: 0.75rem 1rem;
+        display: flex;
+        align-items: center;
+
+        > img {
+          height: 1.25rem;
+          width: max-content;
+          margin-right: 10px;
+        }
+
+        > small {
+        }
       }
 
       .question {

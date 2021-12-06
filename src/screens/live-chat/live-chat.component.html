@@ -43,7 +43,7 @@
           <div (click)="selectCarousel(2)" class="carousel2">
             Các Thông tin khác
           </div>
-          <div (click)="showSearchBar()" class="custom-question">
+          <div (click)="showSB()" class="custom-question">
             Nhập câu hỏi trực tiếp
           </div>
         </div>
@@ -66,7 +66,10 @@
               [src]="'https://trueoutsourcing.com/' + card.image"
               alt="img"
             />
-            <small>🇻🇳 {{ msg.content }}</small>
+            <div class="carousel-cell__name">
+              <img src="../../assets/images/vietnam.png" alt="flag" />
+              <small>{{ msg.content }}</small></div
+            >
             <div
               class="question"
               *ngFor="let topic of card.topics"
@@ -86,9 +89,7 @@
         <!-- RECOMMEND ANOTHER QUESTION  -->
         <div class="msg-another" *ngSwitchCase="'another-question'">
           <div (click)="pickAnother()"><div>Chọn câu hỏi tiếp</div></div>
-          <div (click)="showSB()" class="custom-question">
-            Nhập câu hỏi mới
-          </div>
+          <div (click)="showSB()" class="custom-question">Nhập câu hỏi mới</div>
         </div>
 
         <!-- TEXT MESSAGE  -->
@@ -127,6 +128,7 @@
       (keyup.enter)="sendMessage()"
       placeholder="Nhắn gì đó với livebot..."
       type="text"
+      id="chat-bar"
     />
     <span (click)="sendMessage()">
       <svg width="22px" height="22px" viewBox="0 0 22 22">
