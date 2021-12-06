@@ -95,16 +95,18 @@
       > div {
         border-radius: 5px;
         padding: 0.5rem 1rem;
-        background: $bg-primary;
-        color: $txt-primary;
+        // background: $bg-primary;
+        background: #ececec;
         word-break: break-word;
         max-width: 15rem;
       }
 
       &-txt {
         &.my-message {
-          background-color: $bg-secondary !important;
-          color: $txt-secondary !important;
+          // background-color: $bg-secondary !important;
+          // color: $txt-secondary !important;
+          background-color: #019d8f !important;
+          color: white !important;
         }
       }
 
@@ -217,8 +219,6 @@
   }
 
   .chat-bar {
-    height: 0;
-    opacity: 0;
     z-index: 999999;
     border-top: 0.5px solid #ebedf0;
     display: flex;
@@ -227,13 +227,12 @@
     background-color: white;
     width: -webkit-fill-available;
     transition: all 0.5s ease-in-out;
-    padding: 0;
+    padding: 0.5rem;
 
-    &.show {
-      height: 2rem;
-      opacity: 1;
-      padding: 0.5rem;
-    }
+    // &.show {
+    //   height: 2rem;
+    //   opacity: 1;
+    // }
 
     > input {
       width: calc(100% - 38px);

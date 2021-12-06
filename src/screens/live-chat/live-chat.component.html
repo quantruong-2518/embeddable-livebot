@@ -121,7 +121,7 @@
   </div>
 
   <!-- CHAT-BAR  -->
-  <div class="chat-bar" [class]="showSearchBar ? 'show' : null">
+  <div class="chat-bar">
     <input
       [(ngModel)]="key"
       (keyup.enter)="sendMessage()"
