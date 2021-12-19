@@ -33,7 +33,7 @@ export class LiveChatComponent implements OnInit {
     },
   ];
 
-  key = '';
+  searchingContent = '';
   conversationId = '';
   showAllButtonDisplay = false;
   showAllSugs = false;
@@ -268,22 +268,22 @@ export class LiveChatComponent implements OnInit {
     let initMessage = {
       type: 'text',
       from: 1,
-      content: this.key,
+      content: this.searchingContent,
     };
 
-    if (this.key) {
-      if (this.isSensitiveWord(this.key)) {
+    if (this.searchingContent) {
+      if (this.isSensitiveWord(this.searchingContent)) {
         initMessage.content =
           'Phát hiện ngôn từ không phù hợp, vui lòng nhập lại';
         initMessage.from = 2;
       } else {
         this._service.sendMessage({
-          content: this.key,
+          content: this.searchingContent,
         });
       }
 
       this.messages.push(initMessage);
-      this.key = '';
+      this.searchingContent = '';
 
       this.removeOldSuggestions();
       this.scrollToBottom();
